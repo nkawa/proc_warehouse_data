@@ -9,7 +9,8 @@ import json
 
 #with open("denosed_pred_result_11-12_inspection_area.csv") as f:
 
-boxdf = pd.read_csv("denoised_pred_result_11-12_inspection_area.csv") 
+#boxdf = pd.read_csv("denoised_pred_result_11-12_inspection_area.csv") 
+boxdf = pd.read_csv("denoised_pred_result_07-12_inspection_area_with_offset_frame_id.csv") 
 
 #　とりあえず、asayu の結果だけ使ってみる
 
@@ -37,15 +38,15 @@ maxbox = max(boxdf['box_no'])
 boxdf.describe()
 
 boxdata = []
-for i in range(maxbox):
+pallet_id = 0
+for i in range(1,maxbox+1):
     current_box_data = []
     print ("Box:",i)
     box = boxdf[boxdf['box_no']==i]
     lastFrame = -10
-    pallet_id = 0
     for idx, row in box.iterrows():
         exist = row['pred_result']        
-        curframe = row['frame_id']
+        curframe = row['offset_frame_id']
         if exist==1 and lastFrame == -10: # 最初
             start_frame = curframe
             lastFrame = curframe
@@ -71,6 +72,6 @@ for i in range(maxbox):
     boxdata.append(current_box_data)
 
         
-with open("box_inspection_area_11-12.json","w") as f:
+with open("box_inspection_area_07-12.json","w") as f:
     json.dump(boxdata,f, indent=4)
 #

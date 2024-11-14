@@ -402,8 +402,8 @@ if __name__ == '__main__':
     final_frame = reverse_convert(new_anon)
 
     
-    with open('frame_based_pallet_1110.json', 'w') as f:
-        json.dump(final_frame, f, indent=4)
+#    with open('frame_based_woker_1110.json', 'w') as f:
+#        json.dump(final_frame, f, indent=4)
 
     
 #    with open('pallet_id_based_track.json', 'w') as f:
